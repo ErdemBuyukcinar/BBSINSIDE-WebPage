@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Giriş Yap</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/my-login.css">
+
+	<style>
+		.background-wallpaper {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-image: url(img/bgImg.png);
+			background-size: cover;
+			background-position: center;
+			opacity: 0.5;
+			z-index: -1;
+		}
+	</style>
+</head>
+<body class="my-login-page">
+	<div class="background-wallpaper"></div>
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand text-center mt-5">
+						<a href="main.html"><img src="img/siteLogo.png" alt="site logo"></a>
+					</div>
+					<div class="card fat mt-3">
+						<div class="card-body">
+							<h4 class="card-title">Giriş Yap</h4>
+							<form id="loginForm" novalidate>
+								<div class="form-group">
+									<label for="email">E-posta Adresi</label>
+									<input id="email" type="email" class="form-control" required>
+								</div>
+								<div class="form-group">
+									<label for="password">Şifre</label>
+									<input id="password" type="password" class="form-control" required>
+								</div>
+								<div class="form-group m-0 d-flex justify-content-between">
+									<button type="submit" class="btn btn-primary">Giriş Yap</button>
+									<a href="register.html" class="btn btn-secondary">Kayıt Ol</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer text-center mt-2">Copyright &copy; 2025 — BBSINSIDE</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		document.getElementById("loginForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+
+			const email = document.getElementById("email").value.trim();
+			const password = document.getElementById("password").value;
+
+			const userData = localStorage.getItem("user_" + email);
+
+			if (!userData) {
+				Swal.fire("Hata", "Bu e-posta ile kayıtlı kullanıcı bulunamadı.", "error");
+				return;
+			}
+
+			const user = JSON.parse(userData);
+
+			if (user.password !== password) {
+				Swal.fire("Hata", "Şifre yanlış.", "error");
+				return;
+			}
+
+			localStorage.setItem("currentUser", JSON.stringify(user)); // Oturumu başlat
+			Swal.fire("Giriş Başarılı", "", "success").then(() => {
+				window.location.href = "main.html";
+			});
+		});
+	</script>
+</body>
+</html>
