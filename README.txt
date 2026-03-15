@@ -21,8 +21,7 @@
 - Herhangi bir barındırma servisi kullanılmaz.
 
 # Geliştirici Ekibi
-- 👨‍💻 Nuh Sertuğ Yıldız
- Frontend tasarımı ve Sayfa Düzenlemeleri
+-
 
 - 👨‍💻 Erdem Büyükçınar
  Backend geliştirme ve veri yapısı tasarımı
